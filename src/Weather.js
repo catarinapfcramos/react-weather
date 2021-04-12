@@ -6,6 +6,7 @@ import "./Weather.css";
 
 export default function Weather() {
 const [city, setCity] = useState("");
+const [weather, setWeather] = useState("");
 
 
     function updateCity(event) {
@@ -13,7 +14,14 @@ const [city, setCity] = useState("");
         setCity(event.target.value);
     }
     function showWeather(response) {
-        console.log(response.data);
+        setWeather({
+          city: response.data.name,
+          description: response.data.weather[0].description,
+          icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+          temperature: Math.round(response.data.main.temp),
+          humidity: Math.round(response.data.main.humidity),
+          windSpeed: Math.round(response.data.wind.speed)
+        })
     }
 
     function handleSubmit(event){
@@ -46,18 +54,18 @@ return(
         </div>
       </div>
     </form>
-    <div className="City">Porto</div>
+    <div className="City">{weather.city}</div>
     <div className="Icon">
-      <p className="description">Sunny</p>
+      <p className="description">{weather.description}</p>
       <img
-        src="http://openweathermap.org/img/wn/01d@2x.png"
-        alt="weather icon"
+        src={weather.icon}
+        alt={weather.description}
         className="main-icon"
       />
     </div>
      <div className="temperature">
       <div className="weather-temperature">
-        <span className="currentTemperature">16</span>
+        <span className="currentTemperature">{weather.temperature}</span>
         <span className="units">
           <a href="/" className="active">
             °C
@@ -76,9 +84,9 @@ return(
     </div>
     <div className="Details">
       <p>
-        Humidity: 70%
+        Humidity: {weather.humidity} %
         <br />
-        Wind: 3km/h
+        Wind: {weather.windSpeed} m/s
       </p>
     </div>
     </div>
