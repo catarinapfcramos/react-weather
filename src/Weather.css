@@ -1,0 +1,43 @@
+.City {
+  color: rgb(43, 42, 42);
+  padding: 15px 5px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 900;
+  font-size: 70px;
+}
+.description {
+  text-transform: capitalize;
+  margin-bottom: 0;
+}
+.search-button,
+.current-button {
+  background: #adcedd;
+  color: rgb(43, 42, 42);
+}
+.max-temp {
+  color: red;
+}
+.min-temp {
+  color: blue;
+}
+.units {
+  color: rgb(43, 42, 42);
+  position: relative;
+  top: -30px;
+}
+.currentTemperature {
+  color: rgb(43, 42, 42);
+  padding: 15px 5px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 900;
+  font-size: 70px;
+}
+
+.weather-temperature .active {
+  color: rgb(43, 42, 42);
+  cursor: default;
+  text-decoration: none;
+}
+.weather-temperature .active:hover {
+  text-decoration: none;
+}
