@@ -4,14 +4,15 @@ import axios from "axios";
 import "./Weather.css";
 
 
-export default function Weather() {
-const [city, setCity] = useState("");
-const [weather, setWeather] = useState("");
+export default function Weather(props) {
+    const [city, setCity] = useState(props.defaultCity);
+    const [weather, setWeather] = useState("");
 
 
     function updateCity(event) {
         event.preventDefault();
         setCity(event.target.value);
+               
     }
     function showWeather(response) {
         setWeather({
@@ -19,6 +20,8 @@ const [weather, setWeather] = useState("");
           description: response.data.weather[0].description,
           icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
           temperature: Math.round(response.data.main.temp),
+          maxTemp: Math.round(response.data.main.temp_max),
+          minTemp: Math.round(response.data.main.temp_min),
           humidity: Math.round(response.data.main.humidity),
           windSpeed: Math.round(response.data.wind.speed)
         })
@@ -31,10 +34,12 @@ const [weather, setWeather] = useState("");
         let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
         axios.get(apiUrl).then(showWeather);
     }
+
+    
 return(
     <div className="Weather">
-<p className="date">Last updated at: Saturday 10:35</p>
-<form onSubmit={handleSubmit}>
+    <p className="date">Last updated at: Saturday 10:35</p>
+    <form onSubmit={handleSubmit}>
       <div className="row g-3 align-items-center">
         <div className="col-8">
           <input
@@ -77,8 +82,8 @@ return(
         </span>
       </div>
       <p>
-        <span className="max-temp">16</span>
-        <span>°</span>/<span className="min-temp">10</span>
+        <span className="max-temp">{weather.maxTemp}</span>
+        <span>°</span>/<span className="min-temp">{weather.minTemp}</span>
         <span>°</span>
       </p>
     </div>
