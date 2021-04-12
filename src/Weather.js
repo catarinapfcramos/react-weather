@@ -1,19 +1,39 @@
-import React from "react";
+import React, { useState} from "react";
+import axios from "axios";
+
 import "./Weather.css";
 
-export default function Weather() {
 
+export default function Weather() {
+const [city, setCity] = useState("");
+
+
+    function updateCity(event) {
+        event.preventDefault();
+        setCity(event.target.value);
+    }
+    function showWeather(response) {
+        console.log(response.data);
+    }
+
+    function handleSubmit(event){
+        event.preventDefault();
+        let apiKey="4b590c33d87dbad37bb78d97de248093";
+        let units="metric";
+        let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+        axios.get(apiUrl).then(showWeather);
+    }
 return(
     <div className="Weather">
 <p className="date">Last updated at: Saturday 10:35</p>
-<form>
+<form onSubmit={handleSubmit}>
       <div className="row g-3 align-items-center">
         <div className="col-8">
           <input
             type="search"
             className="form-control search-bar"
             placeholder="Search city..."
-            autoComplete="off"
+            onChange={updateCity}
           />
         </div>
         <div className="col-2">
@@ -61,7 +81,6 @@ return(
         Wind: 3km/h
       </p>
     </div>
-
     </div>
 )
 
