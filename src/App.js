@@ -7,12 +7,14 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <div className="weather-app">
-    <Weather />
-    <hr />
-      <Forecast />
-    <hr />
-      <Coder />
+      <div className="container">
+        <div className="weather-app">
+          <Weather defaultCity="Porto" />
+          <hr />
+          <Forecast />
+          <hr />
+          <Coder />
+        </div>
       </div>
     </div>
   );
