@@ -45,8 +45,8 @@ export default function Weather(props) {
         <div className="Weather">
         <p><FormattedDate date={weather.date}/></p>
         <form onSubmit={handleSubmit}>
-          <div className="row g-3 align-items-center">
-            <div className="col-8">
+          <div className="row ">
+            <div className="col-7">
               <input
                 type="search"
                 className="form-control search-bar"
@@ -54,13 +54,11 @@ export default function Weather(props) {
                 onChange={updateCity}
               />
             </div>
+            <div className="col-3">
+              <input type="submit" value="Search" className="btn btn-secondary search-button" />
+           </div>
             <div className="col-2">
-              <button type="submit" className="btn btn-secondary search-button">
-                Search
-              </button>
-            </div>
-            <div className="col-2">
-              <button className="btn btn-secondary current-button">Current</button>
+              <button className="btn btn-secondary current-button">📍</button>
             </div>
           </div>
         </form>
