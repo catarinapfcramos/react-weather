@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import FormattedDate from "./FormattedDate";
+import WeatherData from "./WeatherData";
 
 import "./Weather.css";
 
@@ -10,7 +11,6 @@ export default function Weather(props) {
     const [weather, setWeather] = useState({ ready : false });
 
     function updateCity(event) {
-        event.preventDefault();
         setCity(event.target.value);    
     }
 
@@ -28,10 +28,16 @@ export default function Weather(props) {
           windSpeed: Math.round(response.data.wind.speed)
         })
     }
+    function search(){
+      let apiKey="4b590c33d87dbad37bb78d97de248093";
+      let units="metric";
+      let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+      axios.get(apiUrl).then(showWeather);
+    }
 
     function handleSubmit(event){
         event.preventDefault();
-        showWeather();        
+        search();        
     }
 
     if (weather.ready) {
@@ -58,47 +64,10 @@ export default function Weather(props) {
             </div>
           </div>
         </form>
-        <div className="City">{weather.city}</div>
-        <div className="Icon">
-          <p className="description">{weather.description}</p>
-          <img
-            src={weather.icon}
-            alt={weather.description}
-            className="main-icon"
-          />
-        </div>
-        <div className="temperature">
-          <div className="weather-temperature">
-            <span className="currentTemperature">{weather.temperature}</span>
-            <span className="units">
-              <a href="/" className="active">
-                °C
-              </a>
-              |
-              <a href="/" className="inactive">
-                °F
-              </a>
-            </span>
-          </div>
-          <p>
-            <span className="max-temp">{weather.maxTemp}</span>
-            <span>°</span>/<span className="min-temp">{weather.minTemp}</span>
-            <span>°</span>
-          </p>
-        </div>
-        <div className="Details">
-          <p>
-            Humidity: {weather.humidity} %
-            <br />
-            Wind: {weather.windSpeed} m/s
-          </p>
-        </div>
-        </div>
+        <WeatherData data={weather} />
+      </div>
 ) } else {
-    let apiKey="4b590c33d87dbad37bb78d97de248093";
-    let units="metric";
-    let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-    axios.get(apiUrl).then(showWeather);
-  return ("Loading...");
+    search();
+    return ("Loading...");
   }
 }
