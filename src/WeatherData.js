@@ -1,4 +1,5 @@
-
+import React from "react";
+import WeatherTemperature from "./WeatherTemperature";
 
 export default function WeatherData(props) {
     return(
@@ -12,25 +13,8 @@ export default function WeatherData(props) {
             className="main-icon"
           />
         </div>
-        <div className="temperature">
-          <div className="weather-temperature">
-            <span className="currentTemperature">{props.data.temperature}</span>
-            <span className="units">
-              <a href="/" className="active">
-                °C
-              </a>
-              |
-              <a href="/" className="inactive">
-                °F
-              </a>
-            </span>
-          </div>
-          <p>
-            <span className="max-temp">{props.data.maxTemp}</span>
-            <span>°</span>/<span className="min-temp">{props.data.minTemp}</span>
-            <span>°</span>
-          </p>
-        </div>
+        <WeatherTemperature celsiusTemperature={props.data.temperature} maxTemp={props.data.maxTemp} minTemp={props.data.minTemp} />
+        
         <div className="Details">
           <p>
             Humidity: {props.data.humidity} %

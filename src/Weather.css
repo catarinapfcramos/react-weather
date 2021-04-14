@@ -33,11 +33,7 @@
   font-size: 70px;
 }
 
-.weather-temperature .active {
-  color: rgb(43, 42, 42);
-  cursor: default;
-  text-decoration: none;
-}
-.weather-temperature .active:hover {
-  text-decoration: none;
+.Weather .col-2,
+.col-3 {
+  padding: 0;
 }
