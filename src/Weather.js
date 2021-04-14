@@ -40,6 +40,20 @@ export default function Weather(props) {
         search();        
     }
 
+    function showPositionWeather(position) {
+      let apiKey="4b590c33d87dbad37bb78d97de248093";
+      let units="metric";
+      let lat = position.coords.latitude;
+      let lon = position.coords.longitude;
+      let url=`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+      axios.get(url).then(showWeather);
+    }
+
+    function showCurrentLocation(event){
+      event.preventDefault();
+      navigator.geolocation.getCurrentPosition(showPositionWeather);
+    }
+
     if (weather.ready) {
       return(
         <div className="Weather">
@@ -58,14 +72,14 @@ export default function Weather(props) {
               <input type="submit" value="Search" className="btn btn-secondary search-button" />
            </div>
             <div className="col-2">
-              <button className="btn btn-secondary current-button">📍</button>
+              <button className="btn btn-secondary current-button" onClick={showCurrentLocation}>📍</button>
             </div>
-          </div>
-        </form>
-        <WeatherData data={weather} />
-      </div>
-) } else {
-    search();
-    return ("Loading...");
-  }
+            </div>
+          </form>
+          <WeatherData data={weather} />
+        </div>
+      ) } else {
+          search();
+          return ("Loading...");
+        }
 }

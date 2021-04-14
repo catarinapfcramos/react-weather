@@ -14,7 +14,6 @@ export default function WeatherData(props) {
           />
         </div>
         <WeatherTemperature celsiusTemperature={props.data.temperature} maxTemp={props.data.maxTemp} minTemp={props.data.minTemp} />
-        
         <div className="Details">
           <p>
             Humidity: {props.data.humidity} %
