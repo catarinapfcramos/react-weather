@@ -19,6 +19,7 @@ export default function Weather(props) {
         setWeather({
           ready: true,
           city: response.data.name,
+          coordinates: response.data.coord,
           date: new Date(response.data.dt * 1000),
           description: response.data.weather[0].description,
           icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
@@ -79,7 +80,7 @@ export default function Weather(props) {
           </form>
           <WeatherData data={weather} />
           <hr />
-          <WeatherForecast />
+          <WeatherForecast coordinates={weather.coordinates} />
         </div>
       ) } else {
           search();
