@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import FormattedDate from "./FormattedDate";
 import WeatherData from "./WeatherData";
+import WeatherForecast from "./WeatherForecast";
 
 import "./Weather.css";
 
@@ -77,6 +78,8 @@ export default function Weather(props) {
             </div>
           </form>
           <WeatherData data={weather} />
+          <hr />
+          <WeatherForecast />
         </div>
       ) } else {
           search();
