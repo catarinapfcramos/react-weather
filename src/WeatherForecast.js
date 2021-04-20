@@ -15,9 +15,15 @@ export default function WeatherForecast(props) {
   if (loaded) {
     return (
       <div className="WeatherForecast row">
-        <div className="col-2">
-          <WeatherForecastDay data={forecast[0]} />
-        </ div>
+        {forecast.map(function(dailyForecast, index) {
+          if(index<5) {
+            return (
+            <div className="col" key={index} >
+             <WeatherForecastDay data={dailyForecast} /> 
+            </ div>);} else {
+              return (null);
+            }
+        })} 
       </div>
     );} else {
         let apiKey =`4b590c33d87dbad37bb78d97de248093`;
