@@ -6,7 +6,7 @@ import WeatherForecastDay from "./WeatherForecastDay";
 export default function WeatherForecast(props) {
   const [loaded,setLoaded] = useState(false);
   const [forecast, setForecast] = useState("");
-
+  
   useEffect(() => {
       setLoaded(false);
   }, [props.coordinates]);
@@ -15,6 +15,7 @@ export default function WeatherForecast(props) {
     setForecast(response.data.daily);
     setLoaded(true);   
   }
+  
   function load() {
         let apiKey =`4b590c33d87dbad37bb78d97de248093`;
         let units="metric";
@@ -37,7 +38,7 @@ export default function WeatherForecast(props) {
             }
         })} 
       </div>
-    );} else {
+     );} else {
         load();
         return "Loading...";
   }
